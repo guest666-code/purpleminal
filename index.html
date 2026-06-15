@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purpleminal v1.0.0</title>
+    <title>Purpleminal v1.1.0</title>
+    
+    <!-- PWA Manifest Dosyamız (Yüklenebilirlik Sağlar) -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Mobil Tarayıcılar İçin Tema Rengi -->
+    <meta name="theme-color" content="#a855f7">
+    
+    <!-- CSS Klasöründeki Stil Dosyamız -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div id="terminal">
+    <!-- Üst Bar (Kapatma, Küçültme Butonları ve Başlık) -->
     <div id="top-bar">
         <div class="dot dot-red"></div>
         <div class="dot dot-yellow"></div>
@@ -16,21 +25,47 @@
         <div id="title">purpleguy@purpleminal: ~</div>
     </div>
     
+    <!-- Çıktıların Ekrana Basıldığı Alan -->
     <div id="output-container">
-        <div>Purpleminal [Sürüm 1.0.0]</div>
-        <div>Yükleniyor... Komut listesi için <span class="accent">'help'</span> yazın.</div>
+        <div>Purpleminal [Sürüm 1.1.0]</div>
+        <div>SGM Altyapısı ile Güçlendirildi. Gizlilik Modu Aktif.</div>
+        <div>Komut listesi ve modüller için <span class="accent">'help'</span> yazın.</div>
         <br>
     </div>
     
+    <!-- Komut Giriş Satırı -->
     <div id="input-line">
         <span id="prompt">purpleminal $></span>
         <input type="text" id="cmd-input" autofocus autocomplete="off" spellcheck="false">
     </div>
 </div>
 
+<!-- JavaScript Modüllerimiz -->
+<!-- Önce komut listesini yüklüyoruz ki main.js içinden erişebilelim -->
 <script src="js/commands.js"></script>
 <script src="js/main.js"></script>
 
+<!-- PWA (Service Worker) ve Bildirim İzni Kayıt Kodu -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => {
+                    console.log('Purpleminal Service Worker başarıyla kaydedildi!');
+                    
+                    // Kullanıcıdan bildirim izni isteme penceresi
+                    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+                        Notification.requestPermission().then(permission => {
+                            if (permission === 'granted') {
+                                console.log('Bildirim izni verildi, 4 saatlik döngü hazır.');
+                            }
+                        });
+                    }
+                })
+                .catch(err => console.log('PWA Kayıt Hatası:', err));
+        });
+    }
+</script>
+
 </body>
 </html>
-
