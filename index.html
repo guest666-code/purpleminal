@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purpleminal v1.0.0</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="terminal">
+    <div id="top-bar">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <div id="title">purpleguy@purpleminal: ~</div>
+    </div>
+    
+    <div id="output-container">
+        <div>Purpleminal [Sürüm 1.0.0]</div>
+        <div>Yükleniyor... Komut listesi için <span class="accent">'help'</span> yazın.</div>
+        <br>
+    </div>
+    
+    <div id="input-line">
+        <span id="prompt">purpleminal $></span>
+        <input type="text" id="cmd-input" autofocus autocomplete="off" spellcheck="false">
+    </div>
+</div>
+
+<script src="js/commands.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
+
